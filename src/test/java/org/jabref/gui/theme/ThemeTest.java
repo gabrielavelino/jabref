@@ -15,6 +15,7 @@ public class ThemeTest {
         assertEquals(Theme.Type.DEFAULT, theme.getType());
         assertEquals(Optional.empty(), theme.getAdditionalStylesheet(),
                 "didn't expect additional stylesheet to be available");
+        // Neste método de caso de teste ele verifica se o caminho para o tema Branco ou 'light theme' esta em branco ou se existe.
     }
 
     @Test
@@ -24,6 +25,7 @@ public class ThemeTest {
         assertEquals(Theme.Type.DEFAULT, theme.getType());
         assertEquals(Optional.empty(), theme.getAdditionalStylesheet(),
                 "didn't expect additional stylesheet to be available");
+        // Verifica se o tema Branco é usado caso seja o Css Básico.
     }
 
     @Test
@@ -34,6 +36,7 @@ public class ThemeTest {
         assertTrue(theme.getAdditionalStylesheet().isPresent());
         assertEquals("Dark.css", theme.getAdditionalStylesheet().get().getWatchPath().getFileName().toString(),
                 "expected dark theme stylesheet to be available");
+        // Verifica se o tema Escuro é usado quando o caminho for DarkCss.
     }
 
     @Test
@@ -43,6 +46,7 @@ public class ThemeTest {
         assertEquals(Theme.Type.DEFAULT, theme.getType());
         assertEquals(Optional.empty(), theme.getAdditionalStylesheet(),
                 "didn't expect additional stylesheet to be available when location is a directory");
+        // Custom theme é ignorado caso seja um diretorio.
     }
 
     @Test
@@ -52,6 +56,7 @@ public class ThemeTest {
         assertEquals(Theme.Type.DEFAULT, theme.getType());
         assertEquals(Optional.empty(), theme.getAdditionalStylesheet(),
                 "didn't expect additional stylesheet when CSS location is just some null terminators!");
+        // Custom theme é ignorado caso o caminho para o arquivo seja inváido
     }
 
     @Test
@@ -61,5 +66,6 @@ public class ThemeTest {
         assertEquals(Theme.Type.CUSTOM, theme.getType());
         assertTrue(theme.getAdditionalStylesheet().isPresent());
         assertEquals("Idonotexist.css", theme.getAdditionalStylesheet().get().getWatchPath().getFileName().toString());
+    // Teste para o caso de não encontrar o arquivo de tema custom.
     }
 }
