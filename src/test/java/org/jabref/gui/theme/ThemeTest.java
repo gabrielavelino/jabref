@@ -27,6 +27,16 @@ public class ThemeTest {
                 "didn't expect additional stylesheet to be available");
         // Verifica se o tema Branco é usado caso seja o Css Básico.
     }
+    
+        @Test
+    public void lightThemeUsedWhenPathIsWhiteCss() {
+        Theme theme = new Theme("White.css");
+
+        assertEquals(Theme.Type.DEFAULT, theme.getType());
+        assertEquals(Optional.empty(), theme.getAdditionalStylesheet(),
+                "stylesheet não esta disponivel");
+        // Neste metodo criado ele verifica se o lightTheme esta traduzido e recebe o path 'White.css' e esta presente nos arquivos de temas.
+    }
 
     @Test
     public void darkThemeUsedWhenPathIsDarkCss() {
@@ -57,6 +67,21 @@ public class ThemeTest {
         assertEquals(Optional.empty(), theme.getAdditionalStylesheet(),
                 "didn't expect additional stylesheet when CSS location is just some null terminators!");
         // Custom theme é ignorado caso o caminho para o arquivo seja inváido
+    }
+    
+    @Test
+    public void customThemeChangedToBaseCssIfNotExist() {
+        Theme theme = new Theme("TemaCustom.css");
+
+        assertEquals(Theme.Type.DEFAULT, theme.getType());
+        assertEquals(Optional.empty(), theme.getAdditionalStylesheet(),
+                "didn't expect additional stylesheet when CSS location is just some null terminators!");
+
+
+        // assertEquals(Theme.Type.CUSTOM, theme.getType());
+        // assertTrue(theme.getAdditionalStylesheet().isPresent());
+        // assertEquals("Idonotexist.css", theme.getAdditionalStylesheet().get().getWatchPath().getFileName().toString());
+        // Metodo que verifica que quando o custom Theme não exite ele muda para o 'Base.css' ou default.
     }
 
     @Test
