@@ -1,5 +1,6 @@
 package org.jabref.model.entry.field;
-
+import static java.lang.System.*;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -35,7 +36,7 @@ public enum StandardField implements Field {
     COMMENT("comment"),
     CROSSREF("crossref", FieldProperty.SINGLE_ENTRY_LINK),
     DATE("date", FieldProperty.DATE),
-    DAY("day"),
+    DAY("day", FieldProperty.NUMERIC),
     DAYFILED("dayfiled"),
     DOI("doi", "DOI", FieldProperty.DOI),
     EDITION("edition", FieldProperty.NUMERIC),
@@ -135,7 +136,7 @@ public enum StandardField implements Field {
     YEAR("year", FieldProperty.NUMERIC),
     YEARFILED("yearfiled"),
     MR_NUMBER("mrnumber"),
-    ZBL_NUMBER("zbl"), // needed for fetcher
+    ZBL_NUMBER("zbl"),
     XDATA("xdata", FieldProperty.MULTIPLE_ENTRY_LINK),
     XREF("xref", FieldProperty.SINGLE_ENTRY_LINK),
 
@@ -145,6 +146,7 @@ public enum StandardField implements Field {
     TIMESTAMP("timestamp", FieldProperty.DATE),
     CREATIONDATE("creationdate", FieldProperty.DATE),
     MODIFICATIONDATE("modificationdate", FieldProperty.DATE);
+
 
     private final String name;
     private final String displayName;
@@ -202,5 +204,32 @@ public enum StandardField implements Field {
         } else {
             return displayName;
         }
+    }
+
+    /*
+        public Object numberInteiros(String nome){
+        try{
+            Integer.parseInt(StandardField.NUMBER.getName(nome));
+
+        }catch(NumberFormatException exception){
+            out.println("Falhou");
+
+        }
+        return nome;
+    }*/
+
+
+    public Object numberInteiros(String nome){
+        try{
+            Integer.parseInt(StandardField.NUMBER.getName(nome));
+
+        }catch(NumberFormatException exception){
+            return exception;
+        }
+        return nome;
+    }
+
+    public String getName(String nome) {
+        return nome;
     }
 }
